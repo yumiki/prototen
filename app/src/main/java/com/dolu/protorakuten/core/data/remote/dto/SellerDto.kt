@@ -1,4 +1,4 @@
-package com.dolu.protorakuten.feature_search.data.remote.dto
+package com.dolu.protorakuten.core.data.remote.dto
 
 data class SellerDto(
     val id: Long,

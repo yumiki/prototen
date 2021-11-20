@@ -1,11 +1,6 @@
 package com.dolu.protorakuten.feature_search.data.local
 
 import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
-import com.dolu.protorakuten.core.model.Product
-import com.dolu.protorakuten.feature_search.data.local.entity.ProductEntity
 
 @Dao
 interface ProductDao {

@@ -1,5 +1,6 @@
 package com.dolu.protorakuten.feature_search.presentation.components
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusable
@@ -9,7 +10,6 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.dolu.protorakuten.core.model.Product
-import com.dolu.protorakuten.core.model.dummyProduct
+import com.dolu.protorakuten.core.domain.model.Product
+import com.dolu.protorakuten.core.domain.model.dummyProduct
 import com.dolu.protorakuten.ui.theme.ProtoRakutenTheme
 import com.gowtham.ratingbar.RatingBar
 import java.text.DecimalFormat
@@ -34,7 +34,13 @@ fun SearchResultList(products: List<Product>, modifier: Modifier, onItemClicked:
             .fillMaxSize()
     ){
         items(products.size) { index ->
-            SearchResultItem(item = products[index], modifier= modifier, onItemClicked = onItemClicked)
+            AnimatedVisibility(
+                visible = true,
+                enter = fadeIn() + slideInVertically(),
+                exit = fadeOut() + slideOutVertically()
+            ) {
+                SearchResultItem(item = products[index], modifier= modifier, onItemClicked = onItemClicked)
+            }
             if (index < products.size - 1) {
                 Divider()
             }

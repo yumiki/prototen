@@ -1,6 +1,7 @@
 package com.dolu.protorakuten.feature_search.di
 
 import com.dolu.protorakuten.BuildConfig
+import com.dolu.protorakuten.core.data.remote.ProductApi
 import com.dolu.protorakuten.feature_search.data.remote.SearchApi
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -30,4 +31,8 @@ object AppModule{
     @Provides
     @Singleton
     fun provideWebService(retrofit: Retrofit): SearchApi = retrofit.create(SearchApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideProductService(retrofit: Retrofit): ProductApi = retrofit.create(ProductApi::class.java)
 }

@@ -1,6 +1,6 @@
 package com.dolu.protorakuten.feature_search.data.remote.dto
 
-import com.dolu.protorakuten.core.model.Product
+import com.dolu.protorakuten.core.domain.model.Product
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)

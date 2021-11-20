@@ -1,7 +1,6 @@
 package com.dolu.protorakuten.feature_search.presentation.search
 
-import android.util.Log
-import android.widget.Toast
+import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
@@ -21,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.dolu.protorakuten.feature_search.presentation.SearchViewModel
 import com.dolu.protorakuten.feature_search.presentation.components.SearchResultList
+import com.dolu.protorakuten.feature_search.presentation.util.Screen
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.rx2.asFlow
@@ -87,12 +87,22 @@ fun SearchScreen(
                             })
                     )
                     Divider()
-                    SearchResultList(
-                        products = state.searchResultProducts ?: emptyList(),
-                        Modifier.zIndex(-5f),
-                        onItemClicked = {
-                            Log.e("Ludo", "Just clicked on ${it.title}")
-                        })
+                    AnimatedVisibility(
+                        visible = state.searchResultProducts?.isNotEmpty()?: false,
+                        enter = fadeIn() + slideInVertically(),
+                        exit = fadeOut() + slideOutVertically()
+                    ) {
+                        SearchResultList(
+                            products = state.searchResultProducts ?: emptyList(),
+                            Modifier.zIndex(-5f),
+                            onItemClicked = {
+                                navController
+                                    .navigate(
+                                        Screen.ProductDetailsScreen.route + "?productId=${it.id}",
+                                    )
+                            })
+                    }
+
                 }
                 if (state.isLoading) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))

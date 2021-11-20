@@ -1,4 +1,4 @@
-package com.dolu.protorakuten.core.model
+package com.dolu.protorakuten.core.domain.model
 
 import com.dolu.protorakuten.feature_search.data.local.entity.ProductEntity
 import com.dolu.protorakuten.feature_search.domain.model.Buybox

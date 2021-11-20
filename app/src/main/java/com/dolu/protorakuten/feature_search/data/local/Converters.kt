@@ -2,7 +2,7 @@ package com.dolu.protorakuten.feature_search.data.local
 
 import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
-import com.dolu.protorakuten.core.model.Product
+import com.dolu.protorakuten.core.domain.model.Product
 import com.dolu.protorakuten.feature_search.data.util.JsonParser
 import com.dolu.protorakuten.feature_search.domain.model.Buybox
 import com.squareup.moshi.Types

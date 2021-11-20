@@ -1,6 +1,6 @@
 package com.dolu.protorakuten.feature_search.domain.repository
 
-import com.dolu.protorakuten.core.model.Product
+import com.dolu.protorakuten.core.domain.model.Product
 import com.dolu.protorakuten.core.util.Resource
 import io.reactivex.Flowable
 

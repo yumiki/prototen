@@ -17,7 +17,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object SearchModule {
@@ -57,13 +56,12 @@ object SearchModule {
     @Provides
     @Singleton
     fun provideProductDatabase(
-        app: Application,
-        moshi: Moshi): ProductDatabase {
+        app: Application
+    ): ProductDatabase {
         return Room.databaseBuilder(
             app,
             ProductDatabase::class.java,
             "product_db")
-            //.addTypeConverter(Converters(MoshiParser(moshi)))
             .build()
     }
 
