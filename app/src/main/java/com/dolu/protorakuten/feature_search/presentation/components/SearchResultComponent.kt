@@ -28,13 +28,13 @@ import java.text.DecimalFormat
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun SearchResultList(products: List<Product>, modifier: Modifier) {
+fun SearchResultList(products: List<Product>, modifier: Modifier, onItemClicked: (item: Product) -> Unit = {}) {
     LazyColumn (
         modifier = modifier
             .fillMaxSize()
     ){
         items(products.size) { index ->
-            SearchResultItem(item = products[index], modifier= modifier)
+            SearchResultItem(item = products[index], modifier= modifier, onItemClicked = onItemClicked)
             if (index < products.size - 1) {
                 Divider()
             }
@@ -43,13 +43,14 @@ fun SearchResultList(products: List<Product>, modifier: Modifier) {
 }
 
 @Composable
-fun SearchResultItem(item: Product, modifier: Modifier = Modifier) {
+fun SearchResultItem(item: Product, modifier: Modifier = Modifier, onItemClicked: (item: Product) -> Unit = {}) {
     Box(modifier
         .focusable(true)
         .clickable {
-
+            onItemClicked(item)
         }
         .padding(16.dp)
+        .fillMaxWidth()
     ) {
         Row(modifier) {
             Image(

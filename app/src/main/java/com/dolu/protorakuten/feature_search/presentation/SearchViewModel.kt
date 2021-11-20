@@ -50,7 +50,7 @@ class SearchViewModel @Inject constructor(
             Flowable.interval(500, TimeUnit.MILLISECONDS)
                 .take(1)
                 .flatMap {
-                    getSearchResultProducts(query)
+                    getSearchResultProducts(query.trim())
                 }
                 .subscribe({ result ->
                     when(result) {
