@@ -10,7 +10,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.dolu.protorakuten.R
 import com.dolu.protorakuten.core.model.Product
@@ -36,8 +38,14 @@ fun SearchResultItem(item: Product) {
             modifier = Modifier.size(64.dp)
         )
         Column {
-            Text(text = item.title)
+            Text(
+                text = item.title,
+                fontSize= 16.sp,
+                fontWeight = FontWeight.Bold
+            )
             Text(text = "${item.nbReviews} reviews")
+            Text(text = "Neuf dès ${item.newBestPrice}")
+            Text(text = "Occasion dès ${item.usedBestPrice}")
         }
     }
 }

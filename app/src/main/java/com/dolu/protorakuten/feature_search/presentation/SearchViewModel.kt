@@ -1,5 +1,6 @@
 package com.dolu.protorakuten.feature_search.presentation
 
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
@@ -51,28 +52,35 @@ class SearchViewModel @Inject constructor(
                 .flatMap {
                     getSearchResultProducts(query)
                 }
-                .subscribe {
-                    when(it) {
+                .subscribe({ result ->
+                    when(result) {
                         is Resource.Success -> {
                             _state.value = state.value.copy(
-                                searchResultProducts = it.data,
+                                searchResultProducts = result.data,
                                 isLoading = false
                             )
                         }
                         is Resource.Error -> {
                             _state.value = state.value.copy(
-                                searchResultProducts = it.data,
+                                searchResultProducts = result.data,
                                 isLoading = false
                             )
-                            _eventFlow.onNext(UIEvent.ShowSnackBar(it.message ?: ""))
+                            _eventFlow.onNext(UIEvent.ShowSnackBar(result.message ?: ""))
                         }
                         is Resource.Loading -> {
                             _state.value = state.value.copy(
-                                searchResultProducts = it.data,
+                                searchResultProducts = result.data,
                                 isLoading = true
                             )
                         }
                     }
-                }
+                }, {
+                    _state.value = state.value.copy(
+                        isLoading = false
+                    )
+                    _eventFlow.onNext(UIEvent.ShowSnackBar(it.message ?: ""))
+                    Log.e("SearchViewModel", "Il y a un soucis ${it.localizedMessage}")
+                    it.printStackTrace()
+                })
     }
 }

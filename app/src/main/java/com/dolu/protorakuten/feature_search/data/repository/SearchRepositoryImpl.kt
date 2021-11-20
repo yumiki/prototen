@@ -13,6 +13,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.functions.BiConsumer
 import retrofit2.HttpException
 import java.io.IOException
+import java.lang.RuntimeException
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject
@@ -30,7 +31,9 @@ constructor(
             emitter.onNext(Resource.Loading(searchResults?.products))
 
             try {
-                val remoteSearchResultsDto = searchApi.search(query).blockingGet()
+                val remoteSearchResultsDto = searchApi
+                    .search(query)
+                    .blockingGet()
                 //disposable?.dispose()
                 /*disposable = searchApi.search(query).subscribe(BiConsumer { data, error ->
                     if (error != null) {
@@ -62,6 +65,14 @@ constructor(
                     message = "Oulala ca marche pas fatal ${e.localizedMessage}",
                     data = searchResults?.products
                 ))
+            } catch (e: RuntimeException) {
+                Log.e(TAG,"Error occured: ${e.localizedMessage}")
+                e.printStackTrace()
+                emitter.onNext(
+                    Resource.Error(
+                        message = "Oulala ca marche pas run ${e.cause?.localizedMessage}",
+                        data = searchResults?.products
+                    ))
             }
 
             val brandNewSearchResultsProducts = searchDao.getSearchResult(query)?.toSearchResults()?.products
@@ -69,5 +80,7 @@ constructor(
         }, BackpressureStrategy.BUFFER)
     }
 
-
+    companion object {
+        val TAG: String = SearchRepositoryImpl::class.java.simpleName
+    }
 }

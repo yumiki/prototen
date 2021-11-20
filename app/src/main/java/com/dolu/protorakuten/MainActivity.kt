@@ -4,14 +4,16 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.dolu.protorakuten.feature_search.presentation.SearchViewModel
 import com.dolu.protorakuten.feature_search.presentation.components.SearchResultList
@@ -54,19 +56,35 @@ class MainActivity : ComponentActivity() {
                     Surface(
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background) {
-                        Column {
-                            TextField(
-                                value = viewModel.query.value,
-                                onValueChange = viewModel::onSearch,
-                                modifier = Modifier.fillMaxWidth(),
-                                placeholder = {
-                                    Text(text = "Search...")
-                                }
-                            )
-                            Divider()
-                            SearchResultList(products = state.searchResultProducts?: emptyList())
+                        Box {
+                            Column {
+                                TextField(
+                                    value = viewModel.query.value,
+                                    onValueChange = viewModel::onSearch,
+                                    singleLine = true,
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    placeholder = {
+                                        Text(text = "Search...")
+                                    },
+                                    leadingIcon = {
+                                        Icon(
+                                            Icons.Default.Search,
+                                            contentDescription = "",
+                                            modifier = Modifier
+                                                .padding(15.dp)
+                                                .size(24.dp)
+                                        )
+                                    }
+                                )
+                                Divider()
+                                SearchResultList(products = state.searchResultProducts?: emptyList())
+                            }
+                            if(state.isLoading) {
+                                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                            }
                         }
-
                     }
                 }
             }

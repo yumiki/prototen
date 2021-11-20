@@ -16,6 +16,7 @@ class ProtoRakutenApplication: Application() {
                 Log.e("Proto", e.localizedMessage)
             } else {
                 // Forward all others to current thread's uncaught exception handler
+                Log.e("Proto", e.localizedMessage, e)
                 Thread.currentThread().also { thread ->
                     thread.uncaughtExceptionHandler.uncaughtException(thread, e)
                 }
