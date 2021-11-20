@@ -28,7 +28,7 @@ class SearchViewModel @Inject constructor(
     private val getSearchResultProducts: GetSearchResultProducts
 ) : ViewModel() {
 
-    private val _query = mutableStateOf("Samsung")
+    private val _query = mutableStateOf("")
     val query: State<String> = _query
 
     private val _state = mutableStateOf(SearchState())

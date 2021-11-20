@@ -117,4 +117,6 @@ dependencies {
 
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-rx2:1.5.2'
     implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation "io.github.a914-gowtham:compose-ratingbar:1.1.1"
+
 }
