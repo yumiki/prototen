@@ -1,5 +1,6 @@
 package com.dolu.protorakuten.feature_search.data.remote.dto
 
+import com.dolu.protorakuten.core.domain.model.GlobalRating
 import com.dolu.protorakuten.core.domain.model.Product
 import com.squareup.moshi.JsonClass
 
@@ -21,9 +22,11 @@ data class ProductDto(
         usedBestPrice = usedBestPrice,
         buybox = buybox.toBuybox(),
         imagesUrls = imagesUrls,
-        nbReviews = nbReviews,
         newBestPrice = newBestPrice,
-        reviewsAverageNote = reviewsAverageNote,
+        review = GlobalRating(
+            score = reviewsAverageNote,
+            nbReviews = nbReviews
+        ),
         categoryRef = categoryRef
     )
 }

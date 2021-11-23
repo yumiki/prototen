@@ -14,6 +14,9 @@ interface ProductDetailsDao {
     @Query("DELETE FROM productdetailsentity WHERE id = :productId")
     fun deleteProductDetailsById(productId: Long)
 
-    @Query("SELECT * FROM ProductDetailsEntity WHERE id = :productId")
-    fun getProductDetailsById(productId: Long)
+    @Query("SELECT * FROM productdetailsentity WHERE id = :productId")
+    fun getProductDetailsById(productId: Long): ProductDetailsEntity?
+
+    @Query("SELECT * FROM productdetailsentity")
+    fun getAllProductDetails(): List<ProductDetailsEntity>
 }

@@ -1,26 +1,24 @@
 package com.dolu.protorakuten.feature_search.presentation.search
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.dolu.protorakuten.core.presentation.SearchField
 import com.dolu.protorakuten.feature_search.presentation.SearchViewModel
 import com.dolu.protorakuten.feature_search.presentation.components.SearchResultList
 import com.dolu.protorakuten.feature_search.presentation.util.Screen
+import com.dolu.protorakuten.ui.theme.ProtoRakutenTheme
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.rx2.asFlow
@@ -58,37 +56,14 @@ fun SearchScreen(
         ) {
             Box {
                 Column {
-                    val focusManager = LocalFocusManager.current
-                    TextField(
-                        value = viewModel.query.value,
-                        onValueChange = viewModel::onSearch,
-                        singleLine = true,
-                        modifier = Modifier
-                            .zIndex(1f)
-                            .fillMaxWidth()
-                            .padding(16.dp)
-                            .background(MaterialTheme.colors.background),
-                        placeholder = {
-                            Text(text = "Search...")
-                        },
-                        leadingIcon = {
-                            Icon(
-                                Icons.Default.Search,
-                                contentDescription = "",
-                                modifier = Modifier
-                                    .padding(15.dp)
-                                    .size(24.dp)
-                            )
-                        },
-                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-                        keyboardActions = KeyboardActions(
-                            onDone = {
-                                focusManager.clearFocus()
-                            })
+                    LocalFocusManager.current
+                    SearchField(
+                        query = viewModel.query.value,
+                        onValueChange = viewModel::onSearch
                     )
                     Divider()
                     AnimatedVisibility(
-                        visible = state.searchResultProducts?.isNotEmpty()?: false,
+                        visible = state.searchResultProducts?.isNotEmpty() ?: false,
                         enter = fadeIn() + slideInVertically(),
                         exit = fadeOut() + slideOutVertically()
                     ) {
@@ -109,5 +84,24 @@ fun SearchScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun SearchScreenPreview() {
+    ProtoRakutenTheme {
+    }
+}
+
+
+@Preview
+@Composable
+fun SearchFieldPreview() {
+    ProtoRakutenTheme {
+        SearchField(
+            query = "Samsung",
+            onValueChange = {}
+        )
     }
 }

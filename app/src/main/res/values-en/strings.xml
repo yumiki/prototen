@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProtoRakuten</string>
+    <string name="search_hint">Search in Rakuten</string>
+    <string name="new_product_price_label">New from</string>
+    <string name="used_product_price_label">Used from</string>
+    <string name="back_action_cd">Back</string>
+    <string name="review_label">%d reviews</string>
+    <string name="used_button_tab_label">Used</string>
+    <string name="new_button_tab_label">New</string>
+    <string name="refurb_button_tab_label">Refurb</string>
+    <string name="new_product_details_page_price_label">New product</string>
+    <string name="used_product_details_page_price_label">Used</string>
+    <string name="add_to_cart_button">Add to card</string>
+    <string name="description_pager_tab_label">Description</string>
+    <string name="contact_seller_button">Contact seller</string>
+</resources>

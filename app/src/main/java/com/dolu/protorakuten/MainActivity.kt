@@ -12,16 +12,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.dolu.protorakuten.feature_search.presentation.product.ProductDetailsScreen
 import com.dolu.protorakuten.feature_search.presentation.search.SearchScreen
 import com.dolu.protorakuten.feature_search.presentation.util.Screen
 import com.dolu.protorakuten.ui.theme.ProtoRakutenTheme
+import com.google.accompanist.pager.ExperimentalPagerApi
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalPagerApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -64,13 +66,6 @@ fun Greeting(name: String) {
 fun DefaultPreview() {
     ProtoRakutenTheme {
         Greeting("Android")
-        /*Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color(0xA0A0A010))
-                .blur(10.dp)) {
-            BlurEffect(30f,30f)
-        }*/
         Surface(
             color = Color.Black.copy(0.5f)
         ) {

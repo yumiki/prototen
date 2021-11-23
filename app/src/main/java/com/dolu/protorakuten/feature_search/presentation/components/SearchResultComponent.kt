@@ -9,20 +9,21 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.dolu.protorakuten.R
 import com.dolu.protorakuten.core.domain.model.Product
 import com.dolu.protorakuten.core.domain.model.dummyProduct
+import com.dolu.protorakuten.core.presentation.PriceTextField
+import com.dolu.protorakuten.core.presentation.ReviewBar
 import com.dolu.protorakuten.ui.theme.ProtoRakutenTheme
-import com.gowtham.ratingbar.RatingBar
 import java.text.DecimalFormat
 
 
@@ -73,41 +74,27 @@ fun SearchResultItem(item: Product, modifier: Modifier = Modifier, onItemClicked
                 df.maximumFractionDigits = 2
                 df.minimumFractionDigits = 0
                 Text(
-                    modifier= modifier,
+                    modifier = modifier,
                     text = item.title,
-                    fontSize= 16.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    RatingBar(
-                        value = item.reviewsAverageNote.toFloat(),
-                        size=12.dp,
-                        padding=1.dp,
-                        onRatingChanged = {
-
-                        },
-                        onValueChange = {
-
-                        }
-                    )
-                    Text(
-                        text = "${item.nbReviews} reviews",
-                        fontSize= 10.sp,
-                        fontWeight = FontWeight.Normal,
-                        color = Color.Gray
-                        //fontSize = 14.dp
-                    )
-                }
-                Text(
-                    text = "Neuf dès ${ df.format(item.newBestPrice)}",
-                    fontSize= 16.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Red
+                ReviewBar(
+                    review = item.review,
+                    starSize = 12.dp,
+                    fontSize = 10.sp
                 )
-                if(item.usedBestPrice > 0) {
-                    Text(text = "Occasion dès ${item.usedBestPrice}")
+                PriceTextField(
+                    price = item.newBestPrice,
+                    new = true,
+                    prefix = stringResource(R.string.new_product_price_label)
+                )
+                if (item.usedBestPrice > 0) {
+                    PriceTextField(
+                        price = item.usedBestPrice,
+                        new = false,
+                        prefix = stringResource(R.string.used_product_price_label)
+                    )
                 }
             }
         }

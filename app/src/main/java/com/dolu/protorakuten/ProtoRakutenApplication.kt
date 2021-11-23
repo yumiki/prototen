@@ -13,10 +13,10 @@ class ProtoRakutenApplication: Application() {
         RxJavaPlugins.setErrorHandler { e ->
             if (e is UndeliverableException) {
                 // Merely log undeliverable exceptions
-                Log.e("Proto", e.localizedMessage)
+                Log.e("Proto(RxErrorHandler)", e.localizedMessage)
             } else {
                 // Forward all others to current thread's uncaught exception handler
-                Log.e("Proto", e.localizedMessage, e)
+                Log.e("Proto(RxErrorHandler)", e.localizedMessage, e)
                 Thread.currentThread().also { thread ->
                     thread.uncaughtExceptionHandler.uncaughtException(thread, e)
                 }

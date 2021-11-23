@@ -23,7 +23,7 @@ constructor(
         return Flowable.create({ emitter ->
             emitter.onNext(Resource.Loading())
             val searchResults = searchDao.getSearchResult(query)?.toSearchResults()
-            Log.i("Ludo","cache result: $searchResults")
+            Log.i(TAG, "cache result: $searchResults")
             emitter.onNext(Resource.Loading(searchResults?.products))
 
             try {
@@ -31,7 +31,7 @@ constructor(
                     .search(query)
                     .blockingGet()
 
-                Log.i("Ludo","Api result: $remoteSearchResultsDto")
+                Log.i(TAG, "Api result: $remoteSearchResultsDto")
 
                 searchDao.deleteSearchByTitle(query)
                 searchDao.insertSearchResults(remoteSearchResultsDto.toSearchResultEntity())
@@ -49,7 +49,7 @@ constructor(
                     data = searchResults?.products
                 ))
             } catch (e: RuntimeException) {
-                Log.e(TAG,"Error occured: ${e.localizedMessage}")
+                Log.e(TAG, "Error occurred: ${e.localizedMessage}")
                 e.printStackTrace()
                 emitter.onNext(
                     Resource.Error(

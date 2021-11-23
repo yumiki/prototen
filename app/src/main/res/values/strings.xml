@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">ProtoRakuten</string>
+    <string name="search_hint">Rechercher sur Rakuten</string>
+    <string name="new_product_price_label">"Neuf dès "</string>
+    <string name="used_product_price_label">"Occasion dès "</string>
+    <string name="back_action_cd">Retour à la page précedente</string>
+    <string name="review_label">%d avis</string>
+    <string name="used_button_tab_label">Occasion</string>
+    <string name="new_button_tab_label">Neuf</string>
+    <string name="refurb_button_tab_label">Reconditionné</string>
+    <string name="new_product_details_page_price_label">Produit neuf</string>
+    <string name="used_product_details_page_price_label">Occasion</string>
+    <string name="add_to_cart_button">Ajouter au panier</string>
+    <string name="description_pager_tab_label">Description</string>
+    <string name="contact_seller_button">Contacter le vendeur</string>
 </resources>
